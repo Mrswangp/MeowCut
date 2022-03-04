@@ -1,13 +1,19 @@
 #pragma once
 
 #include <memory>
+#include <optional>
 
-#include "common/meow_ret_code.h"
 #include "common/meow_texture.h"
+#include "proxy_include/meow_status_code.h"
 
 namespace Meow {
-
+struct MeowTexturePoolImpl;
 struct MeowTexturePool {
+  static MeowTexturePool& Instance() {
+    static MeowTexturePool t;
+    return t;
+  }
+
   /**
    * @brief GL线程调用
    *
@@ -15,19 +21,24 @@ struct MeowTexturePool {
    * @param height
    * @return MeowTexture
    */
-  MeowTexture Get(uint32_t width, uint32_t height);
+  std::optional<MeowTexture> Get(uint32_t width, uint32_t height);
 
   /**
    * @brief GL线程调用
    *
    * @param texture
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode GiveBack(MeowTexture texture);
+  MeowStatusCode GiveBack(MeowTexture texture);
+
+  MeowStatusCode Clear();
 
  private:
-  struct MeowTexturePoolImpl;
-  std::unique_ptr<MeowTexturePoolImpl> impl_{nullptr};
+  MeowTexturePool();
+
+  ~MeowTexturePool();
+
+  MeowTexturePoolImpl* impl_{nullptr};
 };
 
 }  // namespace Meow

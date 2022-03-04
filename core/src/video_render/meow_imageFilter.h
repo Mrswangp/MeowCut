@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <string>
 
-#include "common/meow_ret_code.h"
 #include "common/meow_texture.h"
+#include "proxy_include/meow_status_code.h"
 
 namespace Meow {
 
@@ -46,73 +46,73 @@ struct ImageFilter {
    * @brief 向整个滤镜链条末尾添加某一个类型的滤镜
    *
    * @param filter_type
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode PushBack(Type filter_type);
+  MeowStatusCode PushBack(Type filter_type);
 
   /**
    * @brief 向整个滤镜链条头部添加某一个类型的滤镜
    *
    * @param filter_type
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode PushFront(Type filter_type);
+  MeowStatusCode PushFront(Type filter_type);
 
   /**
    * @brief 移除尾部滤镜
    *
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode PopBack();
+  MeowStatusCode PopBack();
 
   /**
    * @brief 移除头部滤镜
    *
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode PopFront();
+  MeowStatusCode PopFront();
 
   /**
    * @brief 在某个位置插入某种类型的滤镜
    *
    * @param index
    * @param filter_type
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode Insert(int32_t index, Type filter_type);
+  MeowStatusCode Insert(int32_t index, Type filter_type);
 
   /**
    * @brief 清空链条
    *
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode Clear();
+  MeowStatusCode Clear();
 
   /**
    * @brief 移除某种类型的滤镜
    *
    * @param filter_type
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode Remove(Type filter_type);
+  MeowStatusCode Remove(Type filter_type);
 
   /**
    * @brief 设置float类型的参数
    *
    * @param param
    * @param value
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetParam(Param param, float value);
+  MeowStatusCode SetParam(Param param, float value);
 
   /**
    * @brief 设置string类型的参数
    *
    * @param param
    * @param value
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetParam(Param param, std::string value);
+  MeowStatusCode SetParam(Param param, std::string value);
 
   /**
    * @brief 获取float类型的参数值
@@ -141,27 +141,27 @@ struct ImageFilter {
    * @brief 渲染的接口
    *
    * @param param
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode RenderFilter(RenderParam param);
+  MeowStatusCode RenderFilter(RenderParam param);
 
   /**
    * @brief
    * 常用的接口，通过json文件配置渲染链，该操作会清空内部所有链条，应用json内容
    *
    * @param json_file_path
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetFilterWithJsonFile(std::string json_file_path);
+  MeowStatusCode SetFilterWithJsonFile(std::string json_file_path);
 
   /**
    * @brief
    * 常用的接口，通过jsonstring配置渲染链，该操作会清空内部所有链条，应用json内容
    *
    * @param json_file_path
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetFilterWithJsonString(std::string json_string);
+  MeowStatusCode SetFilterWithJsonString(std::string json_string);
 
   //***********************上面是针对于滤镜的接口，下面是针对于转场的接口************************************
 
@@ -215,17 +215,17 @@ struct ImageFilter {
    * 另外在转场前，根据需求可能需要调用GetTransitionTimeInfo获取时长信息
    *
    * @param param
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode RenderEffect(RenderParam param, VideoInputInfo info);
+  MeowStatusCode RenderEffect(RenderParam param, VideoInputInfo info);
 
   /**
    * @brief 通过json格式配置转场或者特效的效果
    *
    * @param json_string
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetEffectWithJsonString(std::string json_string);
+  MeowStatusCode SetEffectWithJsonString(std::string json_string);
 
   ///< 其实还有通过枚举类型来配置转场效果，这里不再列举，都是类似的接口
 };

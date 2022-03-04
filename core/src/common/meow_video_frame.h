@@ -7,6 +7,9 @@
 namespace Meow {
 
 struct MeowVideoFrame {
+  MeowVideoFrame(MeowTexture texture_in, int64_t pts_in, int64_t duration_in);
+  ~MeowVideoFrame();
+
   int64_t pts{0};
   int64_t duration{0};
 

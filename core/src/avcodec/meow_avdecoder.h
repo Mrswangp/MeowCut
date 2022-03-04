@@ -45,13 +45,13 @@ struct MeowDecoder {
 
   ~MeowDecoder();
 
-  MeowRetCode Config(DecoderParam config);
+  MeowStatusCode Config(DecoderParam config);
 
-  MeowRetCode prepare();
+  MeowStatusCode prepare();
 
   Type GetDecoderType() const;
 
-  MeowRetCode SetSpeed(float speed);
+  MeowStatusCode SetSpeed(float speed);
 
   float GetSpeed() const;
 
@@ -65,9 +65,9 @@ struct MeowDecoder {
 
   int32_t GetVHeight();
 
-  MeowRetCode SetResolution(int32_t width, int32_t height);
+  MeowStatusCode SetResolution(int32_t width, int32_t height);
 
-  MeowRetCode Stop();
+  MeowStatusCode Stop();
 
   std::shared_ptr<DecoderFrame> GetFrameAtTime(int64_t time, Type type);
 };

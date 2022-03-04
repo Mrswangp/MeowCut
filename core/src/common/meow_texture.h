@@ -14,9 +14,6 @@ struct MeowTexture {
 
   uint32_t GetHeight() const noexcept { return height_; }
 
-  ///< GL线程析构
-  ~MeowTexture() {}
-
  private:
   uint32_t width_{0};
   uint32_t height_{0};

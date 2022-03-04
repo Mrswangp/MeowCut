@@ -2,11 +2,11 @@
 #define __CORE_AVCODEC_H__
 
 class AVCodec {
-public:
-    AVCodec();
+ public:
+  AVCodec();
 
 #ifdef DEBUG
-    void test();
+  void test();
 #endif  // ! DEBUG
 };
 

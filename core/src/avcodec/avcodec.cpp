@@ -3,13 +3,8 @@
 #include <QDebug>
 #endif  // ! DEBUG
 
-AVCodec::AVCodec()
-{
-}
+AVCodec::AVCodec() {}
 
 #ifdef DEBUG
-void AVCodec::test()
-{
-	qDebug() << "This is test function from AVCodec lib.";
-}
+void AVCodec::test() { qDebug() << "This is test function from AVCodec lib."; }
 #endif  // ! DEBUG

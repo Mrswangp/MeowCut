@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <string>
 
-#include "common/meow_ret_code.h"
 #include "common/meow_texture.h"
+#include "proxy_include/meow_status_code.h"
 
 namespace Meow {
 
@@ -18,9 +18,9 @@ struct Animator {
    *
    * @param json_path
    * @param resource_path
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode ChangeEffect(std::string json_path, std::string resource_path);
+  MeowStatusCode ChangeEffect(std::string json_path, std::string resource_path);
 
   struct Point {
     int32_t x;
@@ -40,9 +40,9 @@ struct Animator {
    * @brief 绘制接口
    *
    * @param param
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode Render(RenderParam param);
+  MeowStatusCode Render(RenderParam param);
 
   /**
    * @brief 获取素材的宽高
@@ -62,9 +62,9 @@ struct Animator {
    * @brief 设置字体资源路径
    *
    * @param font_path
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetFontPath(std::string font_path);
+  MeowStatusCode SetFontPath(std::string font_path);
 
   struct TextStyle {
     std::string content;  ///< 点击输入文字
@@ -91,17 +91,17 @@ struct Animator {
    * @brief 设置文本样式
    *
    * @param style
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetTextStyle(TextStyle style);
+  MeowStatusCode SetTextStyle(TextStyle style);
 
   /**
    * @brief 字符样式
    *
    * @param font
-   * @return MeowRetCode
+   * @return MeowStatusCode
    */
-  MeowRetCode SetFontStyle(FontStyle font);
+  MeowStatusCode SetFontStyle(FontStyle font);
 };
 
 

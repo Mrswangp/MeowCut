@@ -1,6 +1,6 @@
 #include <QtWidgets/QApplication>
 
-#include "avcodec.h"
+#include "avcodecdemo.h"
 
 int main(int argc, char *argv[])
 {

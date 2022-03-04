@@ -1,7 +1,7 @@
 if (_DEMO_TYPE_)
     project(${_DEMO_TYPE_} VERSION ${SOFTWARE_VERSION} LANGUAGES CXX)
 
-    find_package(Qt5 COMPONENTS Widgets REQUIRED)
+    find_package(Qt5 COMPONENTS Widgets OpenGL REQUIRED)
 
     set(CMAKE_AUTOUIC ON)
     set(CMAKE_AUTOMOC ON)
@@ -13,6 +13,9 @@ if (_DEMO_TYPE_)
 
     if ("${_DEMO_TYPE_}" STREQUAL "audio_effect")
     elseif("${_DEMO_TYPE_}" STREQUAL "avcodec")
+        add_subdirectory(src/common)
+        add_subdirectory(src/gl_manager)
+        add_subdirectory(src/video_render)
         add_subdirectory(src/avcodec)
         add_subdirectory(avcodec_demo)
     elseif("${_DEMO_TYPE_}" STREQUAL "meowcut_core")
@@ -21,12 +24,12 @@ if (_DEMO_TYPE_)
         message(FATAL_ERROR "DEMO_TYPE(${DEMO_TYPE}) not supported")
     endif()
 
-    target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets ${OPENGL_gl_LIBRARY})
+    target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::OpenGL ${OPENGL_gl_LIBRARY})
 
 else()
     project(${CORE_TARGET} VERSION ${SOFTWARE_VERSION} LANGUAGES CXX)
 
-    find_package(Qt5 COMPONENTS Widgets REQUIRED)
+    find_package(Qt5 COMPONENTS Widgets OpenGL REQUIRED)
 
     # 设置头文件和库文件生成目录
     set(LIBRARY_OUTPUT_PATH "${CORE_OUTPUT}")
@@ -39,7 +42,11 @@ else()
 
     add_subdirectory(src)
 
-    target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets ${OPENGL_gl_LIBRARY})
+    message("message opengl gl library is ssd ${OPENGL_gl_LIBRARY} ${OPENGL_opengl_LIBRARY} ${OPENGL_egl_LIBRARY}")
+
+    # target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
+    target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::OpenGL)
+    # target_link_libraries(${PROJECT_NAME} PRIVATE  ${OPENGL_opengl_LIBRARY})
 
     # 拷贝部署需要的头文件???
     # file(COPY include/*.h DESTINATION ${LIBRARY_OUTPUT_PATH}/include FOLLOW_SYMLINK_CHAIN)
