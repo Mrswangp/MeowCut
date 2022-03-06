@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(MeowCutBuild)
 
 # 手动设置参数，visual studio使用
-set(Qt_Path "D:\\install\\qt\\5.14.0\\msvc2017_64\\lib\\cmake\\Qt5")
+set(Qt_Path "$ENV{Qt_Path}")
 set(SOFTWARE_TYPE "demo")
 set(DEMO_TYPE "avcodec")
 set(CMAKE_BUILD_TYPE "debug")
@@ -75,18 +75,10 @@ else()
 endif()
 
 # QT5 path
-if (NOT "$ENV{QT_DIR}" STREQUAL "")     # 配置自己的qt路径，对于qt5需要包含Qt5Config.cmake文件
-    set(Qt5_DIR "$ENV{QT_DIR}")
+if (NOT "${Qt_Path}" STREQUAL "")
+    set(Qt5_DIR "${Qt_Path}")
 else()
-    if (NOT "$ENV{Qt5_DIR}" STREQUAL "")
-        set(Qt5_DIR "$ENV{Qt5_DIR}")
-    else()
-        if (NOT "${Qt_Path}" STREQUAL "")
-            set(Qt5_DIR "${Qt_Path}")
-        else()
-            message(FATAL_ERROR "Qt_Path and Qt env both not set")
-        endif()
-    endif()
+    message(FATAL_ERROR "Qt_Path both not set")
 endif()
 
 # 指定头文件路径
